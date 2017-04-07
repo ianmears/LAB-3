@@ -14,12 +14,24 @@ public enum eRank {
 	QUEEN(12), 
 	KING(13), 
 	ACE(14),
-	JOKER(99);
+	JOKER(99,true);
+	
 
 	private int iRankNbr;
+	private boolean wild;
 
+	public boolean isWild() {
+		return wild;
+	}
+	public void setWild(boolean wild) {
+		this.wild = wild;
+	}
 	private eRank(int iRankNbr) {
 		this.iRankNbr = iRankNbr;
+	}
+	private eRank(int iRankNbr,boolean wild) {
+		this.iRankNbr = iRankNbr;
+		this.wild=wild;
 	}
 	public int getiRankNbr() {
 		return iRankNbr;

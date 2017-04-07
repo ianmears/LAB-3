@@ -8,6 +8,7 @@ public class Card implements Comparable {
 
 	private eRank eRank;
 	private eSuit eSuit;
+	private boolean wild;
 	
 	public Card(eRank eRank, eSuit eSuit) {
 		this.eRank = eRank;
@@ -26,6 +27,10 @@ public class Card implements Comparable {
 	    Card c = (Card) o; 
 	    return c.geteRank().compareTo(this.geteRank()); 
 
+	}
+	
+	public boolean isWild(boolean wild){
+		return this.wild;
 	}
 	
 	public static Comparator<Card> CardRank = new Comparator<Card>() {

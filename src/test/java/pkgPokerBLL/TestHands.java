@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import Exception.HandException;
 import pkgPokerEnum.eHandStrength;
 import pkgPokerEnum.eRank;
 import pkgPokerEnum.eSuit;
@@ -11,7 +12,7 @@ import pkgPokerEnum.eSuit;
 public class TestHands {
 
 	@Test
-	public void TestFullHouse() {
+	public void TestFullHouse() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.THREE, eSuit.CLUBS));
@@ -36,7 +37,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestPair() {
+	public void TestPair() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.TWO, eSuit.CLUBS));
@@ -60,7 +61,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestRoyalFlush() {
+	public void TestRoyalFlush() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.ACE, eSuit.SPADES));
@@ -79,7 +80,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestStraightFlush() {
+	public void TestStraightFlush() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.NINE, eSuit.SPADES));
@@ -98,7 +99,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestFlush() {
+	public void TestFlush() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.EIGHT, eSuit.SPADES));
@@ -116,7 +117,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestStraight() {
+	public void TestStraight() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.ACE, eSuit.SPADES));
@@ -131,7 +132,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestTwoPair() {
+	public void TestTwoPair() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.NINE, eSuit.DIAMONDS));
@@ -153,7 +154,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestFourOfKind() {
+	public void TestFourOfKind() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.THREE, eSuit.DIAMONDS));
@@ -172,7 +173,7 @@ public class TestHands {
 	}
 
 	@Test
-	public void TestThreeOfKind() {
+	public void TestThreeOfKind() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.THREE, eSuit.DIAMONDS));
@@ -210,7 +211,7 @@ public class TestHands {
 	 */
 
 	@Test
-	public void TestAcesAndEights() {
+	public void TestAcesAndEights() throws HandException {
 
 		Hand h = new Hand();
 		h.AddCardToHand(new Card(eRank.EIGHT, eSuit.DIAMONDS));
@@ -229,5 +230,25 @@ public class TestHands {
 		assertEquals(eRank.EIGHT.getiRankNbr(), h.getHandScore().getLoHand().getiRankNbr());
 
 	}
+	
+	@Test
+	public void isHandFiveOfAKind() throws HandException{
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eRank.JOKER, eSuit.JOKER));
+		h.AddCardToHand(new Card(eRank.FIVE, eSuit.SPADES));
+		h.AddCardToHand(new Card(eRank.FIVE, eSuit.HEARTS));
+		h.AddCardToHand(new Card(eRank.FIVE, eSuit.CLUBS));
+		h.AddCardToHand(new Card(eRank.FIVE, eSuit.DIAMONDS));
+		h.EvaluateHand();
+		
+		assertEquals(eHandStrength.FiveOfAKind.getHandStrength(),
+				h.getHandScore().getHandStrength().getHandStrength());
+		// HI hand
+		assertEquals(eRank.JOKER.getiRankNbr(), h.getHandScore().getHiHand().getiRankNbr());
+
+		// LO hand
+		assertEquals(eRank.FIVE.getiRankNbr(), h.getHandScore().getLoHand().getiRankNbr());
+	}
+	
 
 }
